@@ -5,19 +5,27 @@ float r = 20;
 float a = 150;
 float b = 90;
 
-int i = 0;
+int i;
 
-boolean skw = false, sks = false, ska = false, skd = false, kspace = false;
+boolean kw = false, ks = false, ka = false, kd = false, kbackspace = false, kshift = false;
+boolean kup = false, kdown = false, kright = false, kleft = false;
 float px = 0, py = 0, pz = 0, deep = 1000;
+float angg = 0;
+float angv = 0;
+float x = - PI / 2, y = PI / 2;
+float cx = 0, cy = 0, cz = 700;
+float cr = 10;
 
+float dt;
 
-void settings() {
-  fullScreen(P3D);
-}
+//void settings() {
+//  fullScreen(P3D);
+//}
 
 
 
 void setup() {
+  size(1100, 800, P3D);
   sun = new Sun(50);
   planets = new Planet[5];
 
@@ -36,17 +44,35 @@ void setup() {
 
 
 void draw() {
+  
   background(0);
-
-  if (skw) py -= 10;
-  if (sks) py += 5;
-  if (ska) px -= 5;
-  if (skd) px += 5;
-  if (kspace) deep -= 3;
+  dt = 1 / frameRate;
   
-  camera(0, 0, deep, px, py, pz, 0, 1, 0);
+  if (kw) cy -= 5;
+  if (ks) cy += 5;
+  if (ka) cx -= 5;
+  if (kd) cx += 5;
+  if (kbackspace) cz -= 5;
+  if (kshift) cz += 5;
+  
+  if (kup) x -= 0.05;
+  if (kdown) x += 0.05;
+  if (kright) y -= 0.05;
+  if (kleft) y += 0.05;
+  
+  angv = map(x, -1000, 1000, TWO_PI, -TWO_PI);
+  angg = map(y, -1000, 1000, TWO_PI, -TWO_PI);
+   
+  px = cx + cr * sin(x) * cos(y);
+  py = cy + cr * cos(x);
+  pz = cz + cr * sin(x) * sin(y);
+  
+  camera(cx, cy, cz, px, py, pz, 0, 1, 0);
+  
+  println(x, y);
+  
   //rotateX(radians(45));
-  
+  //println(deep);
   strokeWeight(7);
   stroke(255, 0, 0);
   line(0, 0, 0, 700, 0, 0); //red
@@ -67,23 +93,51 @@ void draw() {
   popMatrix();
 }
 
-
-
 void  keyPressed() {
-  if (keyCode == UP) skw = true;
-  if (keyCode == DOWN) sks = true;
-  if (keyCode == LEFT) ska = true;
-  if (keyCode == RIGHT) skd = true;
-  if (key == ' ') kspace = true;
+  if (key == 'w') kw = true;
+  if (key == 's') ks = true;
+  if (key == 'a') ka = true;
+  if (key == 'd') kd = true;
+  if (key == ' ') kbackspace = true;
+  if (keyCode == SHIFT) kshift = true;
+  
+  if (keyCode == UP) kup = true;
+  if (keyCode == DOWN) kdown = true;
+  if (keyCode == LEFT) kright = true;
+  if (keyCode == RIGHT) kleft = true;
 }
 
 void  keyReleased() {
-  if (keyCode == UP) skw = false;
-  if (keyCode == DOWN) sks = false;
-  if (keyCode == LEFT) ska = false;
-  if (keyCode == RIGHT) skd = false;
-  if (key == ' ') kspace = false;
+  if (key == 'w') kw = false;
+  if (key == 's') ks = false;
+  if (key == 'a') ka = false;
+  if (key == 'd') kd = false;
+  if (key == ' ') kbackspace = false;
+  if (keyCode == SHIFT) kshift = false;
+  
+  if (keyCode == UP) kup = false;
+  if (keyCode == DOWN) kdown = false;
+  if (keyCode == LEFT) kright = false;
+  if (keyCode == RIGHT) kleft = false;
 }
+
+//void  keyPressed() {
+//  if (keyCode == UP) kw = true;
+//  if (keyCode == DOWN) ks = true;
+//  if (keyCode == LEFT) ka = true;
+//  if (keyCode == RIGHT) kd = true;
+//  if (key == ' ') kbackspace = true;
+//  if (keyCode == SHIFT) kshift = true;
+//}
+
+//void  keyReleased() {
+//  if (keyCode == UP) kw = false;
+//  if (keyCode == DOWN) ks = false;
+//  if (keyCode == LEFT) ka = false;
+//  if (keyCode == RIGHT) kd = false;
+//  if (key == ' ') kbackspace = false;
+//  if (keyCode == SHIFT) kshift = false;
+//}
 
 
 
