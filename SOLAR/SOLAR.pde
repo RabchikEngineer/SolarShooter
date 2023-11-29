@@ -1,7 +1,6 @@
 Sun sun;
 Planet[] planets;
 Cam cam=new Cam();
-Animation animation;
 
 // Planets parameters
 
@@ -21,6 +20,11 @@ float cx = 0, cy = 0, cz = 700;
 
 float dt;
 
+// Background
+
+PShape modelb;
+PImage textureb;
+
 void settings() {
   fullScreen(P3D);
 }
@@ -28,8 +32,17 @@ void settings() {
 void setup() {
   sun = new Sun(50);
   planets = new Planet[5];
-  animation = new Animation("image.png", 4);
+
+  modelb = loadShape("sphere.obj");
+  textureb = loadImage("background.png");
   
+  if (textureb == null) {
+    println("Ошибка загрузки текстуры background.png");
+  }
+  
+  modelb.scale(5000);
+  modelb.setTexture(textureb);
+
   i = 0;
   planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.015, i);
   i = 1;
@@ -40,7 +53,7 @@ void setup() {
   planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), -25, 0.012, i); //0.017
   i = 4;
   planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.010, i); //0.015
-  
+
   cam.pos.set(cx, cy, cz);
 }
 
@@ -49,9 +62,12 @@ void setup() {
 void draw() {
 
   background(0);
+  
+  shape(modelb, 0, 0);
+
   dt = 1 / frameRate;
   float step = 5.0;
-  
+
   if (kw) {
     cam.pos.x -= step * cam.up.x;
     cam.pos.y -= step * cam.up.y;
@@ -101,7 +117,7 @@ void draw() {
   //println(x, y);
 
   // Сoordinate axes
-  
+
   //strokeWeight(7);
   //stroke(255, 0, 0);
   //line(0, 0, 0, 700, 0, 0); //red

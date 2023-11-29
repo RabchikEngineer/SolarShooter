@@ -50,7 +50,7 @@ class Planet {
   }
 
   void display() {
-    angle += speed + 1;
+    angle += speed;
     float px = cos(angle) * a;
     float py = sin(angle) * b;
 
