@@ -1,5 +1,4 @@
 class Planet {
-  
   float r;
   float a;
   float b;
@@ -13,10 +12,10 @@ class Planet {
     this.a = a;
     this.b = b;
     this.ao = ao;
-    this.speed = speed;    
+    this.speed = speed;
   }
 
-  void display() {    
+  void display() {
     angle += speed;
     float px = cos(angle) * a;
     float py = sin(angle) * b;
@@ -31,30 +30,28 @@ class Planet {
     rotateY(angle);
     sphere(r);
     popMatrix();
-    noStroke();    
+    noStroke();
   }
 
-  void orbit() {    
+  void orbit() {
     stroke(255, 50);
     pushMatrix();
     beginShape();
     rotateY(radians(ao));
 
     for (int i = 0; i < orbit.size(); i++) {
-      
       PVector point = orbit.get(i);
       float alpha = map(i, 0, orbit.size(), 0, 255);
       stroke(255, alpha);
-      vertex(point.x, point.y, 0);      
+      vertex(point.x, point.y, 0);
     }
-    
     endShape();
     popMatrix();
     noStroke();
 
     // Уменьшение размера орбиты
-    if (orbit.size() > 180) {     
-      orbit.remove(0);      
-    }   
-  }  
+    if (orbit.size() > 180) {
+      orbit.remove(0);
+    }
+  }
 }

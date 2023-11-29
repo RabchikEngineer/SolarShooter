@@ -1,5 +1,4 @@
 class Sun {
-
   float r;
   float angle = 0;
 
@@ -7,9 +6,7 @@ class Sun {
     this.r = radius;
   }
 
-
-
-  void display() {    
+  void display() {
     stroke(255, 255, 0);
     noFill();
     pushMatrix();
@@ -18,7 +15,6 @@ class Sun {
     sphere(r);
     popMatrix();
     angle += 0.001;
-    noStroke();    
+    noStroke();
   }
-  
 }

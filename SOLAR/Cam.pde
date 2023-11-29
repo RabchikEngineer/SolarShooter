@@ -17,7 +17,7 @@ class Cam {
 
     this.trg.x = this.pos.x + this.dir.x;
     this.trg.y = this.pos.y + this.dir.y;
-    this.trg.z = this.pos.z + this.dir.z; 
+    this.trg.z = this.pos.z + this.dir.z;
   }
 
   //constructor
@@ -53,5 +53,4 @@ class Cam {
     this.trg.y = this.pos.y + this.dir.y * 100.0;
     this.trg.z = this.pos.z + this.dir.z * 100.0;
   }
-  
 }
