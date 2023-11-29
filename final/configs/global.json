@@ -1,0 +1,10 @@
+{
+	"fric_force": 3000,
+	"moving_force":10000,
+	"rotate_damper":10000,
+	"rotate_moment":600,
+	"ai_speed":50,
+	"ai_shoot_distance":600,
+	"marker_radius":300,
+	"marker_ind":200,
+}
