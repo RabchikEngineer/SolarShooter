@@ -3,7 +3,7 @@ class Cam {
   PVector pos;
   PVector dir;
   PVector hor;
-  PVector up;
+  PVector ver;
   PVector trg;
 
   Cam() {
@@ -11,7 +11,7 @@ class Cam {
 
     this.dir = new PVector(0, 0, -1);
     this.hor = new PVector(1, 0, 0);
-    this.up =  new PVector(0, 1, 0);
+    this.ver =  new PVector(0, 1, 0);
 
     this.trg = new PVector(0, 0, 0);
 
@@ -31,21 +31,21 @@ class Cam {
     dir.z += hor.z * dx;
     dir.normalize();
 
-    hor.x = dir.y * up.z - dir.z * up.y;
-    hor.y = dir.z * up.x - dir.x * up.z;
-    hor.z = dir.x * up.y - dir.y * up.x;
+    hor.x = dir.y * ver.z - dir.z * ver.y;
+    hor.y = dir.z * ver.x - dir.x * ver.z;
+    hor.z = dir.x * ver.y - dir.y * ver.x;
     hor.normalize();
 
     //rotate vertical
 
-    dir.x += up.x * dy;
-    dir.y += up.y * dy;
-    dir.z += up.z * dy;
+    dir.x += ver.x * dy;
+    dir.y += ver.y * dy;
+    dir.z += ver.z * dy;
     dir.normalize();
-    up.x = - dir.y * hor.z + dir.z * hor.y;
-    up.y = - dir.z * hor.x + dir.x * hor.z;
-    up.z = - dir.x * hor.y + dir.y * hor.x;
-    up.normalize();
+    ver.x = - dir.y * hor.z + dir.z * hor.y;
+    ver.y = - dir.z * hor.x + dir.x * hor.z;
+    ver.z = - dir.x * hor.y + dir.y * hor.x;
+    ver.normalize();
 
     //recalc target
 

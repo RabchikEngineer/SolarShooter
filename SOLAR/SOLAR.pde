@@ -1,6 +1,6 @@
 Sun sun;
 Planet[] planets;
-Cam cam=new Cam();
+Cam cam;
 
 // Planets parameters
 
@@ -15,6 +15,8 @@ boolean kw = false, ks = false, ka = false, kd = false, kbackspace = false, kshi
 boolean kup = false, kdown = false, kright = false, kleft = false;
 float x=0, y=0;
 float cx = 0, cy = 0, cz = 700;
+float step;
+float angle;
 
 // In future versions
 
@@ -32,6 +34,7 @@ void settings() {
 void setup() {
   sun = new Sun(50);
   planets = new Planet[5];
+  cam = new Cam();
 
   modelb = loadShape("sphere.obj");
   textureb = loadImage("background.png");
@@ -66,17 +69,17 @@ void draw() {
   shape(modelb, 0, 0);
 
   dt = 1 / frameRate;
-  float step = 5.0;
+  step = 10.0;
 
-  if (kw) {
-    cam.pos.x -= step * cam.up.x;
-    cam.pos.y -= step * cam.up.y;
-    cam.pos.z -= step * cam.up.z;
+  if (kbackspace) {
+    cam.pos.x -= step * cam.ver.x;
+    cam.pos.y -= step * cam.ver.y;
+    cam.pos.z -= step * cam.ver.z;
   }
-  if (ks) {
-    cam.pos.x += step * cam.up.x;
-    cam.pos.y += step * cam.up.y;
-    cam.pos.z += step * cam.up.z;
+  if (kshift) {
+    cam.pos.x += step * cam.ver.x;
+    cam.pos.y += step * cam.ver.y;
+    cam.pos.z += step * cam.ver.z;
   }
   if (ka) {
     cam.pos.x -= step * cam.hor.x;
@@ -88,12 +91,12 @@ void draw() {
     cam.pos.y += step * cam.hor.y;
     cam.pos.z += step * cam.hor.z;
   }
-  if (kbackspace) {
+  if (kw) {
     cam.pos.x += step * cam.dir.x;
     cam.pos.y += step * cam.dir.y;
     cam.pos.z += step * cam.dir.z;
   }
-  if (kshift) {
+  if (ks) {
     cam.pos.x -= step * cam.dir.x;
     cam.pos.y -= step * cam.dir.y;
     cam.pos.z -= step * cam.dir.z;
@@ -101,7 +104,7 @@ void draw() {
 
   x = 0;
   y = 0;
-  float angle = 0.01;
+  angle = 0.02;
   if (kup) y -= angle;
   if (kdown) y += angle;
   if (kright) x -= angle;
@@ -112,7 +115,7 @@ void draw() {
   //py = cy + cr * cos(x);
   //pz = cz + cr * sin(x) * sin(y);
 
-  camera(cam.pos.x, cam.pos.y, cam.pos.z, cam.trg.x, cam.trg.y, cam.trg.z, cam.up.x, cam.up.y, cam.up.z);
+  camera(cam.pos.x, cam.pos.y, cam.pos.z, cam.trg.x, cam.trg.y, cam.trg.z, cam.ver.x, cam.ver.y, cam.ver.z);
 
   //println(x, y);
 
