@@ -14,7 +14,7 @@ int i;
 boolean kw = false, ks = false, ka = false, kd = false, kbackspace = false, kshift = false;
 boolean kup = false, kdown = false, kright = false, kleft = false;
 float x=0, y=0;
-float cx = 0, cy = 0, cz = 700;
+float cx = 0, cy = 0, cz = 1600;
 float step;
 float angle;
 
@@ -47,15 +47,15 @@ void setup() {
   modelb.setTexture(textureb);
 
   i = 0;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.015, i);
+  planets[i] = new Planet(r * (1.1 + 1.3 * i * 0.2), a * (1 + i), b * (1 + i), 0.015, i);
   i = 1;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), -25, 0.013, i); //0.018
+  planets[i] = new Planet(r * (1.1 + 1.3 * i * 0.2), a * (3 + i), b * (3 + i), 0.013, i); //0.018
   i = 2;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.008, i); //0.013
+  planets[i] = new Planet(r * (1.1 + 1.3 * i * 0.2), a * (5 + i), b * (5 + i), 0.008, i); //0.013
   i = 3;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), -25, 0.012, i); //0.017
+  planets[i] = new Planet(r * (1.1 + 1.3 * i * 0.2), a * (7 + i), b * (7 + i), 0.008, i); //0.017
   i = 4;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.010, i); //0.015
+  planets[i] = new Planet(r * (1.1 + 1.3 * i * 0.2), a * (9 + i), b * (9 + i), 0.005, i); //0.015
 
   cam.pos.set(cx, cy, cz);
 }
@@ -137,6 +137,19 @@ void draw() {
   for (int i = 0; i < planets.length; i++) {
     planets[i].display();
     planets[i].orbit();
+    
+    PVector planetPos = planets[i].orbit.get(planets[i].orbit.size() - 1);
+    float distanceToPlanet = dist(cam.pos.x, cam.pos.y, cam.pos.z, planetPos.x, planetPos.y, planetPos.z);
+    
+    if (distanceToPlanet <= 200) {
+      println("Камера находится на расстоянии " + distanceToPlanet + " от планеты " + i);
+      //pushMatrix();
+      //translate(width - textWidth("Нажми меняяяяя") - 20, height - 20);
+      //textSize(128);
+      //fill(0, 408, 612);
+      //text("Нажми меняяяяя", 0, 0);
+      //popMatrix();
+    }
   }
   popMatrix();
 }

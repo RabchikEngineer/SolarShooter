@@ -18,7 +18,7 @@ class Sun {
     rotateY(angle);
     shape(model0, 0, 0);
     popMatrix();
-    angle += 0.001;
+    angle += 0.005;
     noStroke();
   }
 }

@@ -20,11 +20,10 @@ class Planet {
   float i;
   ArrayList<PVector> orbit = new ArrayList<PVector>();
 
-  Planet(float radius, float a, float b, float ao, float speed, float i) {
+  Planet(float radius, float a, float b, float speed, float i) {
     this.r = radius;
     this.a = a;
     this.b = b;
-    this.ao = ao;
     this.speed = speed;
     this.i = i;
     if (i == 0) {
@@ -58,7 +57,6 @@ class Planet {
 
     stroke(255);
     pushMatrix();
-    rotateY(radians(ao));
     translate(px, py, 0);
     //rotateY(PI / 2);
     rotateX(PI / 2);
