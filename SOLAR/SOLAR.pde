@@ -1,6 +1,7 @@
 Sun sun;
 Planet[] planets;
 Cam cam=new Cam();
+Animation animation;
 
 // Planets parameters
 
@@ -27,17 +28,18 @@ void settings() {
 void setup() {
   sun = new Sun(50);
   planets = new Planet[5];
-
+  animation = new Animation("image.png", 4);
+  
   i = 0;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.020);
+  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.015, i);
   i = 1;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), -25, 0.020); //0.018
+  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), -25, 0.013, i); //0.018
   i = 2;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.020); //0.013
+  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.008, i); //0.013
   i = 3;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), -25, 0.020); //0.017
+  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), -25, 0.012, i); //0.017
   i = 4;
-  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.020); //0.015
+  planets[i] = new Planet(r * (1.1 + i * 0.2), a * (1 + i), b * (1 + i), 20, 0.010, i); //0.015
   
   cam.pos.set(cx, cy, cz);
 }
@@ -96,7 +98,7 @@ void draw() {
 
   camera(cam.pos.x, cam.pos.y, cam.pos.z, cam.trg.x, cam.trg.y, cam.trg.z, cam.up.x, cam.up.y, cam.up.z);
 
-  println(x, y);
+  //println(x, y);
 
   // Сoordinate axes
   
