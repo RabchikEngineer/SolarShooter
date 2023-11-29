@@ -1,9 +1,9 @@
 class Planet {
-  //PImage texture1 = loadImage("texture1.png");
-  //PImage texture2 = loadImage("texture2.png");
-  //PImage texture3 = loadImage("texture3.png");
-  //PImage texture4 = loadImage("texture4.png");
-  //PImage texture5 = loadImage("texture5.png");
+  PImage texture1 = loadImage("texture1.png");
+  PImage texture2 = loadImage("texture2.png");
+  PImage texture3 = loadImage("texture3.png");
+  PImage texture4 = loadImage("texture4.png");
+  PImage texture5 = loadImage("texture5.png");
   
   PShape model1 = loadShape("sphere.obj");
   PShape model2 = loadShape("sphere.obj");
@@ -28,23 +28,23 @@ class Planet {
     this.i = i;
     if (i == 0) {
       model1.scale(radius);
-      //model1.setTexture(texture1);
+      model1.setTexture(texture1);
     }
     if (i == 1) {
       model2.scale(radius);
-      //model2.setTexture(texture2);
+      model2.setTexture(texture2);
     }
     if (i == 2) {
       model3.scale(radius);
-      //model3.setTexture(texture3);
+      model3.setTexture(texture3);
     }
     if (i == 3) {
       model4.scale(radius);
-      //model4.setTexture(texture4);
+      model4.setTexture(texture4);
     }
     if (i == 4) {
       model5.scale(radius);
-      //model5.setTexture(texture5);
+      model5.setTexture(texture5);
     }
   }
 

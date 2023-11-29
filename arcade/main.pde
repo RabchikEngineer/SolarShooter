@@ -3,24 +3,26 @@ import peasy.*;
 //import java.lang.Math;
 
 Bullet bullet1;
-HashMap<String,ArrayList> config = new HashMap<String,ArrayList>();
-//Ship ship2 = new Ship(200,100,30,30,1);
+HashMap<String,ArrayList> data = new HashMap<String,ArrayList>();
+JSONObject config;
+
 ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 ArrayList<Ship> ships = new ArrayList<Ship>();
-//Bullet[] bullets = new Bullet[100];
-//int bullnum = 0;
-//float demph = 1.5;
+ArrayList<EnemyShip> spawn_list = new ArrayList<EnemyShip>(); 
+
 float dt=1/60,t=0;
 float fric_force = 3000;
 float moving_force = 10000;
 float moving_force_mult = 1;
 float push_force_mult=100;
 float rotate_damper=10000;
+float rotate_moment=2;
 float rotation_speed_mult=5;
 float ai_speed = 50;
 float ai_shoot_distance = 500;
-float marker_radius=250;
-PVector bounds=new PVector(3000,3000);
+float marker_radius = 300;
+float marker_ind=100;
+PVector bounds=new PVector(1000,1000);
 PVector shift = new PVector(0,0);
 
 PShape modelPlayer;
@@ -31,11 +33,15 @@ PeasyCam cam;
 
 boolean w_pressed = false, s_pressed = false, a_pressed = false, d_pressed = false, q_pressed=false, e_pressed=false;
 boolean control_pressed=false, shift_pressed=false, space_pressed=false;
+boolean one_pressed=false, two_pressed=false;
 boolean control_active = false;
 
 
 
 boolean JOYSTICK_MODE = false;
+boolean ARCADE_MODE = true;
+boolean SOLAR_MODE = false;
+boolean win=false;
 
 void settings(){
   //fullScreen(P3D);
@@ -54,12 +60,42 @@ void setup() {
   
   
   Table projs = loadTable("configs/projectiles.csv","header");
-  config.put("bullets", new ArrayList<BulletConf>());
+  data.put("bullets", new ArrayList<BulletConf>());
   for (int i = 0; i<projs.getRowCount();i++) {
-    config.get("bullets").add(new BulletConf(projs.getFloat(i,"speed"),projs.getFloat(i,"damage"),loadImage("sprites/"+projs.getString(i,"filename"))));
+    data.get("bullets").add(new BulletConf(
+        loadImage("sprites/"+projs.getString(i,"filename")),
+        projs.getFloat(i,"mass"),
+        projs.getFloat(i,"damage"),
+        projs.getFloat(i,"speed"),
+        projs.getFloat(i,"alive"),
+        projs.getFloat(i,"resize"),
+        projs.getFloat(i,"rotate")));
+  }
+  Table shipt = loadTable("configs/ships.csv","header");
+  data.put("ships", new ArrayList<ShipConf>());
+  for (int i = 0; i<shipt.getRowCount();i++) {
+    data.get("ships").add(new ShipConf(
+        shipt.getString(i,"filename"),
+        shipt.getFloat(i,"kd"),
+        shipt.getInt(i,"proj_type"),
+        shipt.getFloat(i,"rotate"),
+        shipt.getFloat(i,"shift")));
   }
   
-  print(config.get("bullets").toString());
+  
+  
+  config = loadJSONObject("configs/global.json");
+  fric_force=config.getFloat("fric_force");
+  moving_force=config.getFloat("moving_force");
+  rotate_damper=config.getFloat("rotate_damper");
+  rotate_moment=config.getFloat("rotate_moment");
+  ai_speed=config.getFloat("ai_speed");
+  ai_shoot_distance=config.getFloat("ai_shoot_distance");
+  marker_radius=config.getFloat("marker_radius");
+  marker_ind=config.getFloat("marker_ind");
+  
+  
+  //print(config.get("bullets").toString());
   bullets.add(new Bullet(0,100,new PVector(100,0), PI, 0, 0));
   //for (int i=0; i<bullets.length;i++) {
   //  bullets[i]=new Bullet(100,100,1,false);
@@ -67,37 +103,45 @@ void setup() {
   
   //ships.add(new Ship(width/2,height/2,20,0,10,200,100));
   ships.add(new PlayerShip(width/2,height/2,40,10));
-  spawn();
+  //generate_enemy();
+  generate_enemy();
   spawn();
   //ships.add(new EnemyShip(-200,200,30,10));
   //ships.add(new EnemyShip(300,-200,30,10));
   //ships.add(new EnemyShip(600,-400,30,10));
   
-  ships.get(1).speed.y=100;
+  //ships.get(1).speed.y=100;
   
   //cam = new PeasyCam(this, 200, 200, 100, 50);
   
   
-  modelPlayer = loadShape("models/ship1/ship1.obj");
-  texturePlayer = loadImage("models/ship1/ship1.png");
+  //modelPlayer = loadShape("models/ship1/ship1.obj");
+  //texturePlayer = loadImage("models/ship1/ship1.png");
   
-  modelPlayer.setTexture(texturePlayer);
+  //modelPlayer.setTexture(texturePlayer);
   
   
-  frameRate(600);
+  frameRate(60);
 }
 
 int side = 5;
 
 
 void draw() {
-  //dt=(millis()/1000.0)-t; //чёт не работает, хз
+  
   dt=1/frameRate;
-  //println(dt);
   background(0);
+  if (ARCADE_MODE) {
+  //dt=(millis()/1000.0)-t; //чёт не работает, хз
+  
+  //println(dt);
+  
+  camera(width/2,height/2,500,width/2,height/2,0,0,1,0);
   
   
   Ship ps=ships.get(0);
+  
+  //if (ps.side==1) {ARCADE_MODE=false; win=false;}
   
   shift = new PVector(lerp(shift.x,width/2-ps.pos.x,dt*3),lerp(shift.y,height/2-ps.pos.y,dt*3));
   translate(shift.x, shift.y);
@@ -139,7 +183,9 @@ void draw() {
   
   if (shift_pressed) {moving_force_mult=2;} else {moving_force_mult=1;}
   
-  if (space_pressed) {ps.proj_type=1;} else {ps.proj_type=0;}
+  //if (space_pressed) {ps.proj_type=1;} else {ps.proj_type=0;}
+  if (one_pressed) ps.proj_type=0;
+  if (two_pressed) ps.proj_type=1;
   
   if (!JOYSTICK_MODE) {
   
@@ -150,8 +196,8 @@ void draw() {
       
     if (!(a_pressed ^ d_pressed)) {
       ps.set_moment(0);
-    } else if (a_pressed) {ps.add_moment(-2);}
-      else                {ps.add_moment(2);}  
+    } else if (a_pressed) {ps.set_moment(-rotate_moment);}
+      else                {ps.set_moment(rotate_moment);}  
     
     if (!(q_pressed ^ e_pressed)) {
       ps.constant_force.y=0;
@@ -186,7 +232,8 @@ void draw() {
     //ps.add_moment(1000);
     //ships.get(0).add_momentum(new PVector(500,0));
     //ships.get(0).set_velocity(new PVector(10,0));
-    spawn();
+    generate_enemy();
+    //spawn();
   }
   
   
@@ -278,12 +325,20 @@ void draw() {
   }
   
   
-  
+  spawn();
   
 
   
   t=millis()/1000.0;
   //println(frameRate);
+  } else if (SOLAR_MODE) {
+    background(#00ff00);
+    println("solar_mode");
+  } else {
+    println(win);
+    if (win) {victory();} else {defeat();}
+    if (mousePressed) {SOLAR_MODE=true;}
+  }
 }
 
 
@@ -317,6 +372,12 @@ void keyPressed() {
   if (keyCode == CONTROL) {
     control_pressed=true;
   }
+  if (char(keyCode) == '1') {
+    one_pressed=true;
+  }
+  if (char(keyCode) == '2') {
+    two_pressed=true;
+  }
 }
 
 void keyReleased() {
@@ -347,6 +408,12 @@ void keyReleased() {
   }
   if (keyCode == CONTROL) {
     control_pressed=false;
+  }
+  if (char(keyCode) == '1') {
+    one_pressed=false;
+  }
+  if (char(keyCode) == '2') {
+    two_pressed=false;
   }
 }
 

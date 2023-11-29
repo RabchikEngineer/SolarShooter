@@ -1,13 +1,13 @@
 class Sun {
   PShape model0 = loadShape("sphere.obj");
-  //PImage texture0 = loadImage("texture0.png");
+  PImage texture0 = loadImage("texture0.png");
   float r;
   float angle = 0;
 
   Sun(float radius) {
     this.r = radius;
     model0.scale(radius);
-    //model0.setTexture(texture0);
+    model0.setTexture(texture0);
   }
 
   void display() {

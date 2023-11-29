@@ -6,14 +6,18 @@ class Ship extends PhysicalObject {
   float xp;
   float req_ang=0;
   boolean ai_active=true;
-  PImage[] pics = new PImage[2];
-  String filename = "sprites/ship0.png";
+  ArrayList<ShipConf> conf_list = data.get("ships");
+  ShipConf conf;
+  PImage pic;
+  int type = 0;
   
-  Ship(float x, float y,float r,float ang, int side, float mass, int proj_type, float xp) {
+  Ship(float x, float y,float r,float ang, int side, float mass, float xp, int type) {
     super(x,y,r,ang,side,mass);
-    this.proj_type=proj_type;
+    this.conf = conf_list.get(type);
+    this.pic=loadImage("sprites/"+conf.filename);
+    this.pic.resize(int(r*2),int(r*2));
+    this.proj_type=conf.proj_type;
     this.xp=xp;
-    this.pics[0] = loadImage(filename);
   }
   
   void move() {
@@ -44,7 +48,7 @@ class Ship extends PhysicalObject {
       Ship ps = ships.get(0);
       PVector marker = new PVector(this.pos.x-ps.pos.x,this.pos.y-ps.pos.y);
       //println(marker.mag());
-      if (marker.mag()>marker_radius) {
+      if (marker.mag()>marker_radius+marker_ind) {
         pushMatrix();
         translate(ps.pos.x,ps.pos.y);
         //line(0,0,marker.x,marker.y);
@@ -64,24 +68,19 @@ class Ship extends PhysicalObject {
     
     pushMatrix();
     rotate(this.ang);
-    
-    pushMatrix();
-    rotate(HALF_PI);
     //this.pics[0].resize(int(this.pics[0].width/(this.pics[0].height/r)),int(r));
-    this.pics[0].resize(int(r*2),int(r*2));
-    translate(-this.pics[0].width/2,-this.pics[0].height/2-10);
-    image(this.pics[0],0,0);
-    popMatrix();
-    
-    
+    translate(-pic.width/2+conf.shift,-pic.height/2);
+    //println(conf.shift);
+    rotate(radians(conf.rotate));
+    image(pic,0,0);
     //ellipse(0,0,r,r);
     //rect(5,0,30,10);
     popMatrix();
     
-    pushMatrix();
-    rotate(this.req_ang);
-    line(0,0,100,0);
-    popMatrix();
+    //pushMatrix();
+    //rotate(this.req_ang);
+    //line(0,0,100,0);
+    //popMatrix();
     
     if (t<this.last_shot+this.kd_val) {text2(str(ceil((this.last_shot+this.kd_val-t)*100.0)/100.0), 0,0);}
     text2(str(this.xp),0,-20);
@@ -96,7 +95,7 @@ class Ship extends PhysicalObject {
     if (!kd) {
       Bullet b = new Bullet(pos.x+point.x, pos.y+point.y, direction, this.ang, this.side, this.proj_type);
       bullets.add(b);
-      this.add_momentum(new PVector(-b.mass,0)); //*b.speeds[proj_type]
+      this.add_momentum(new PVector(-b.ref_speed*b.mass,0)); //*b.speeds[proj_type]
       //this.kd=true;
       this.last_shot=t;
     }
@@ -137,7 +136,7 @@ class Ship extends PhysicalObject {
 class PlayerShip extends Ship {
   
   PlayerShip(float x, float y,float r, float mass) {
-    super(x,y,r,0,0,mass,0,1000);
+    super(x,y,r,0,0,mass,10,0);
   }
   
   void shoot() {
@@ -150,9 +149,9 @@ class PlayerShip extends Ship {
 
 class EnemyShip extends Ship {
   
-  EnemyShip(float x, float y,float r, float mass) {
-    super(x,y,r,0,1,mass,0,100);
-    this.kd_val=1;
+  EnemyShip(float x, float y,float r, float mass, int type) {
+    super(x,y,r,0,1,mass,100,type);
+    this.kd_val=conf.kd;
   }
   
   
@@ -160,6 +159,22 @@ class EnemyShip extends Ship {
     super.shoot();
   }
   
+  
+}
+
+
+class ShipConf {
+  String filename;
+  float kd,rotate,shift;
+  int proj_type;
+  
+  ShipConf(String filename, float kd, int proj_type, float rotate, float shift) {
+    this.filename=filename;
+    this.kd=kd;
+    this.proj_type=proj_type;
+    this.rotate=rotate;
+    this.shift=shift;
+  }
   
 }
 

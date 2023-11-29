@@ -73,3 +73,14 @@ void text2(String text,float x, float y) {
   text(text,x-5,y+5);
   fill(255);
 }
+
+
+void victory() {
+  //println("VICTORY");
+  text("VICTORY",width/2,height/2);
+}
+
+void defeat() {
+  //println("DEFEAT");
+  text("DEFEAT",width/2,height/2);
+}

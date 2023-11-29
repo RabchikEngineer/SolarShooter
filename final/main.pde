@@ -411,32 +411,32 @@ void draw() {
     dt = 1 / frameRate;
     step = 10.0;
   
-    if (kbackspace) {
+    if (space_pressed) {
       cam.pos.x -= step * cam.ver.x;
       cam.pos.y -= step * cam.ver.y;
       cam.pos.z -= step * cam.ver.z;
     }
-    if (kshift) {
+    if (shift_pressed) {
       cam.pos.x += step * cam.ver.x;
       cam.pos.y += step * cam.ver.y;
       cam.pos.z += step * cam.ver.z;
     }
-    if (ka) {
+    if (a_pressed) {
       cam.pos.x -= step * cam.hor.x;
       cam.pos.y -= step * cam.hor.y;
       cam.pos.z -= step * cam.hor.z;
     }
-    if (kd) {
+    if (d_pressed) {
       cam.pos.x += step * cam.hor.x;
       cam.pos.y += step * cam.hor.y;
       cam.pos.z += step * cam.hor.z;
     }
-    if (kw) {
+    if (w_pressed) {
       cam.pos.x += step * cam.dir.x;
       cam.pos.y += step * cam.dir.y;
       cam.pos.z += step * cam.dir.z;
     }
-    if (ks) {
+    if (s_pressed) {
       cam.pos.x -= step * cam.dir.x;
       cam.pos.y -= step * cam.dir.y;
       cam.pos.z -= step * cam.dir.z;
