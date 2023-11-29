@@ -1,0 +1,298 @@
+newmtl hull
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hullCockpit
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hullBottom
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hull5
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hull2
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hull1
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hull4
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hullTailpipes
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hull6
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hull3
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl hull7
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl rearGlass
+Ns 5
+Ka 0 0 0
+Kd 0.45098 0.439216 0.509804
+Ks 1 1 1
+newmtl windowFrames
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipes1
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipes3
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipes4
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipes2
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipesFlaps
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipesJoints
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipesExhaust
+Ns 0.01
+Ka 0.372549 0.929412 1
+Kd 0.152941 0.690196 1
+Ks 0 0 0
+newmtl tailpipesShell
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipesVents
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl tailpipeBooster
+Ns 0.01
+Ka 0 0.45098 0.956863
+Kd 0.341176 0.517647 0.768628
+Ks 0 0 0
+newmtl rearBrakes
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl frontGlass
+Ns 5
+Ka 0 0 0
+Kd 0.45098 0.439216 0.509804
+Ks 1 1 1
+newmtl chinHatches
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl lRadar
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl rRadar
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl frontIntakes
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingVanes1
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingVanes2
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl airbrakesTop1
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl airbrakesTop2
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingflaps1
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingflaps2
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl engineFlaps
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl blasters
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingRotation
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingletBase
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingletJoint
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl winglets
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl engineCircles
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl engineDiscs
+Ns 0.01
+Ka 0 0.45098 0.956863
+Kd 0.341176 0.517647 0.768628
+Ks 0 0 0
+newmtl engineCores
+Ns 0.01
+Ka 0.372549 0.929412 1
+Kd 0.152941 0.690196 1
+Ks 0 0 0
+newmtl engineCovers
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl engineRings
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl engineGrooves
+Ns 0.01
+Ka 0.372549 0.929412 1
+Kd 0.152941 0.690196 1
+Ks 0 0 0
+newmtl wings
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl engineExhaust
+Ns 0.01
+Ka 0 0.45098 0.956863
+Kd 0.341176 0.517647 0.768628
+Ks 0 0 0
+newmtl wingExhaust
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
+newmtl wingAileron
+Ns 5
+Ka 0.1 0.1 0.1
+Kd 0.87451 0.956863 1
+Ks 1 0.894118 0.717647
+map_Kd GotG Benatar.png
